@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[hello]]></title>
+    <url>%2F2019%2F04%2F18%2Fhello%2F</url>
+    <content type="text"><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[考研数据结构复习-图的存储]]></title>
+    <url>%2F2018%2F11%2F13%2F%E8%80%83%E7%A0%94%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%A4%8D%E4%B9%A0-%E5%9B%BE%E7%9A%84%E5%AD%98%E5%82%A8%2F</url>
+    <content type="text"><![CDATA[图的存储结构 图的存储结构也分为顺序与链式，其中顺序 -&gt; 邻接矩阵链式 -&gt; 邻接表 针对无向图优化 -&gt; 邻接多重表 ； 针对有向图优化 -&gt; 十字链表 顺序存储邻接矩阵 偷懒可以直接用二维数组可以在一位数组里封装点别的东西，比如点数啥的… 注意 在初始化时 两个点没有直接路径 值为无穷大 自己到自己设为；弗洛伊德算法 A记录最短路径 初始就是MGraph数组 Path初始全为-1表示没有中间结点 1int MGraph[maxSize][maxSize]; 链式存储邻接表 邻接表还有一个逆邻接表 区别就是弧结构存的是指向自己的结点，叫逆邻接表。 123456789101112typedef struct ArchNode&#123; //弧结构体 int adjvex; //从点的边指向的其他结点 struct ArchNode *nextarc; &#125;ArchNode;typedef struct &#123; //结点结构体 int data; ArchNode *firstarc; &#125;VNode;typedef struct&#123; VNode adjlist[maxSize]; int n,e; //n是结点数 e是边的个数&#125;AGraph; 邻接多重表 对无向图的优化 减少了存储量 十字链表 邻接表的有向图优化 邻接表与逆邻接表的结合]]></content>
+      <tags>
+        <tag>数据结构复习</tag>
+        <tag>图</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[考研数据结构复习-二叉树的遍历]]></title>
+    <url>%2F2018%2F10%2F25%2F%E8%80%83%E7%A0%94%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%A4%8D%E4%B9%A0-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86%2F</url>
+    <content type="text"><![CDATA[二叉树的遍历深度优先遍历先序遍历 根左右 1234567891011121314151617181920212223242526typedef struct TNode &#123; int data; TNode *lChild, *rChild;&#125;TNode, *Tree;void PreOrder(Tree T) &#123; if (T != NULL) &#123; printf("%d\n", T-&gt;data); PreOrder(T-&gt;lChild); PreOrder(T-&gt;rChild); &#125;&#125;void notRPreOrder(Tree T) &#123; if(T==NULL) return; Tree stack[1000]; int top = -1; Tree p = NULL; stack[++top] = T; while(top!=-1)&#123; p = stack[top--]; printf("%d\n", p-&gt;data); if(p-&gt;rChild!=NULL) stack[++top] = p-&gt;rChild; //由于用栈所以先压入右边 if(p-&gt;lChild!=NULL) stack[++top] = p-&gt;lChild; &#125;&#125; 中序遍历 这个的非递归写法比较特殊 一路向左 123456789101112131415161718192021222324void InOrder(Tree T) &#123; if (T != NULL) &#123; InOrder(T-&gt;lChild); printf("%d\n", T-&gt;data); InOrder(T-&gt;rChild); &#125;&#125;void notRInOrder(Tree T)&#123; if(T==NULL) return; Tree stack[1000]; int top = -1; Tree p = T; while(top!=-1||p!=NULL)&#123; while(p!=NULL)&#123; stack[++top]=p; p = p-&gt;lChild; &#125; if(top!=-1)&#123; p = stack[top--]; printf("%d\n", p-&gt;data); p = p-&gt;rChild; &#125; &#125;&#125; 后序遍历 后续遍历（左右根）的逆序相当于 根右左 所以可以在先序遍历（根左右）的基础上魔改加栈 改变压入顺序； 1234567891011121314151617181920212223242526void PostOrder(Tree T) &#123; if (T != NULL) &#123; PostOrder(T-&gt;lChild); PostOrder(T-&gt;rChild); printf("%d\n", T-&gt;data); &#125;&#125;void notRPostOrder(Tree T) &#123; if(T==NULL) return; Tree stack[1000]; int stack2[1000]; int top=-1; int top2 = -1; Tree p = NULL; stack[++top] = T; while(top!=-1)&#123; p = stack[top--]; stack2[++top2]=p-&gt;data; if(p-&gt;lChild!=NULL) stack[++top] = p-&gt;lChild; if(p-&gt;rChild!=NULL) stack[++top] = p-&gt;rChild; &#125; while(top2!=-1)&#123; printf("%d\n",stack2[top2--]); &#125;&#125; 广度优先遍历层次遍历 这是用队列的结构 12345678910111213141516171819202122void level(Tree T)&#123; if(T==NULL) return; int size=3; Tree queue[size],p; int rear=0; int front=0; queue[rear++] = T; while(front!=rear)&#123; p = queue[front]; printf("%d\n",p-&gt;data); front = (front+1)%size; if(p-&gt;lChild!=NULL) &#123; queue[rear]=p-&gt;lChild; rear = (rear+1)%size; &#125; if(p-&gt;rChild!=NULL) &#123; queue[rear]=p-&gt;rChild; rear = (rear+1)%size; &#125; &#125;&#125;]]></content>
+      <tags>
+        <tag>数据结构复习</tag>
+        <tag>树</tag>
+        <tag>二叉树</tag>
+        <tag>遍历</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[考研数据结构复习-二叉树]]></title>
+    <url>%2F2018%2F10%2F24%2F%E8%80%83%E7%A0%94%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%A4%8D%E4%B9%A0-%E4%BA%8C%E5%8F%89%E6%A0%91%2F</url>
+    <content type="text"><![CDATA[二叉树的存储结构顺序存储 完全二叉树可以用从0开始的数组存储，第i个结点的子结点下标分别是2*i+1，2i-1。其他二叉树勉强也能用，通过加冗余信息 1int data[10000]; 链式存储 指向两个孩子 孩子表示法：把每个结点的孩子结点排列起来，以单链表作存储结构，则n个结点有n个孩子链&gt;&gt;表，如果是叶子结点则此单链表为空。然后n个头指针又组成一个线性表，采用顺序存储结构，存放进一个一维数组中。为此，设计两种结点结构，一个是孩子链表的孩子结点 另一个是表头数组的表头节点 12345typedef struct BTNode&#123; int data; BTNode* lChild; BTNode* rChild;&#125;BTNode,*BTree; 孩子兄弟表示法 此方法出现在树的存储结构中，树与二叉树区别在于二叉树是分左右的，通过孩子兄弟表示法可以实现树与二叉树、森林与二叉树的互相转换。 12345typedef struct CSNode&#123; int data; struct CSNode *firstchild,*rightbro;&#125;CSNode; 二叉树与树、二叉树与森林的互相转换 由 树/森林 转换二叉树并没有改变逻辑结构 只是改变了他的存储结构，换句话说，转换并没有转换他们的逻辑结构，只是改变了存储方式。 树-&gt;二叉树 双亲节点只连接树的表面上的左边的孩子，另一个指针连接兄弟 森林-&gt;二叉树 森林化二叉树会多出来一步首先各自化为二叉树 注意到所有的二叉树的根节点都没有兄弟，所以通过兄弟结点连接起来]]></content>
+      <tags>
+        <tag>数据结构复习</tag>
+        <tag>树</tag>
+        <tag>二叉树</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[考研数据结构复习-树]]></title>
+    <url>%2F2018%2F10%2F24%2F%E8%80%83%E7%A0%94%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%A4%8D%E4%B9%A0-%E6%A0%91%2F</url>
+    <content type="text"><![CDATA[树的经典结论 树的结点数=所有结点度数+1 度为m的树中第I层上至多有 $$ m ^ { i-1 } $$ 个结点 高度为h的m叉树至多有N=$$ m^{0} $$+$$ m^{1} $$+…….++$$ m^{n-1} $$=(1-$$ m^{n} $$)/(1-m)个结点 具有n个结点的m叉树的最小高度为$$ log_{m}{ [n(m-1)+1] } $$ 树的存储结构顺序存储12345typedef struct&#123; int data; int pIdx;&#125;TNode;TNode tree[maxSize]; 链式存储 孩子表示法 孩子表示法：把每个结点的孩子结点排列起来，以单链表作存储结构，则n个结点有n个孩子链&gt;&gt;表，如果是叶子结点则此单链表为空。然后n个头指针又组成一个线性表，采用顺序存储结构，存放进一个一维数组中。为此，设计两种结点结构，一个是孩子链表的孩子结点 另一个是表头数组的表头节点 12345678910typedef struct CTNode /*孩子结点*/&#123; int child; struct CTNode *next;&#125;CTNode,*ChildPtr;typedef struct /*表头结构*/&#123; int data; ChildPtr firstchild;&#125;CTBox; 孩子兄弟表示法 任意一颗树，它的节点的的第一个孩子如果存在就是唯一的，它的右兄弟如果存在也是唯一的。因此，我们设置两个指针，分别指向该节点的第一个孩子和此节点的右兄弟： 12345typedef struct CSNode&#123; int data; struct CSNode *firstchild,*rightbro;&#125;CSNode;]]></content>
+      <tags>
+        <tag>数据结构复习</tag>
+        <tag>树</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[考研数据结构复习-串]]></title>
+    <url>%2F2018%2F10%2F22%2F%E8%80%83%E7%A0%94%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%A4%8D%E4%B9%A0-%E4%B8%B2%2F</url>
+    <content type="text"><![CDATA[存储 顺序存储时char[] 最后一个要放 \0 所以开6个空间不能放6个数，只能放5个 链式存储先鸽一下 顺序串 代码测试串的特性 1234567891011121314int main() &#123; char str[] = "abcdef"; printf("%d \n", sizeof(str));//输出7； printf("%d \n",strlen(str));//输出6； printf("%s \n", str);//输出abcdef； printf("%c", str[6]);//输出空； str[6] = 'a'; printf("%c", str[6]);//输出a； printf("%s \n", str);//根据编译器不同结果不同 dev还能输出abcdef vs就会乱码 //在直接赋值是不能使用最后一个空间，但是可以单独设置最后一个存的东西 //若最后一个不是 \0 可能会导致乱码 std::string str; //这个是c++里的 本质不是指针 &#125; 结构体定义 123456789101112typedef struct&#123; char str[maxSize+1]; int length;&#125;Str;typedef struct&#123; chat *ch; int length;&#125;Str2; //这个真香Str S;S.length = L;S.ch = (char*)malloc((L+1)*sizeof(char)); 模式匹配算法 模式匹配算法默认从数组下标1开始用 简单的模式匹配算法12345678910111213141516171819202122232425262728293031323334353637383940typedef struct &#123; char *str; int length;&#125;Str;//老师更容易看得懂的int simpleMatch(Str S, Str T) &#123; int i=1,j=1,k=i; while(i&lt;=S.length &amp;&amp; j&lt;= T.length)&#123; if(S.str[i]==T.str[j])&#123; i++; j++; &#125; else&#123; j=1; i=++k; &#125; &#125; if(j&gt;T.length) return k; else return 0;&#125;//我的想法int simpleMatch(Str S, Str T) &#123; int j; for (int i = 1; i &lt;= S.length; i++) &#123; for (j = 1; j &lt;= T.length; j++) &#123; if (S.str[i + j-1] != T.str[j]) break; &#125; if (j == T.length + 1) return i; &#125; return 0;&#125;int main() &#123; Str s, t; s.str = "/abcdef"; s.length = 6; t.str = "/ab"; t.length = 2; printf("%d", simpleMatch(s, t));&#125; KMP算法 KMP算法还是很难的啊QAQ 注意getNext 和 KMP函数 的过程非常类似 基础版本 123456789101112131415161718192021222324252627282930313233343536373839404142typedef struct &#123; char *str; int length;&#125;Str;void getNext(Str T,int next[])&#123; int j=1,t=0; next[1] = 0; while(j&lt;T.length)&#123; if(t==0||T.str[j]==T.str[t])&#123; next[j+1] = t+1; t++; j++; &#125; else t=next[t]; &#125;&#125;int KMP(Str S, Str T,int next[]) &#123; int i=1,j=1; while(i&lt;=S.length &amp;&amp; j&lt;= T.length)&#123; if(j==0||S.str[i]==T.str[j])&#123; i++; j++; &#125; else&#123; j=next[j]; &#125; &#125; if(j&gt;T.length) return i-T.length; else return 0;&#125;int main() &#123; Str s, t; s.str = "/abcdef"; s.length = 6; t.str = "/f"; t.length = 1; int next[100]; getNext(t,next); printf("%d", KMP(s, t,next));&#125; 升级版 next升级成了nextval[j],整个过程类似与并查集，首先看他存在的问题若匹配第五个不成功时，next[5]=4 -&gt; next[4]=3 -&gt;next[3]=2 -&gt;next[2]=1 -&gt;next[1]=0 出现这个问题的条件是当 str[5]==str[4]时你从5跳到4没有任何意义，类似并查集的 需要递归到一个不同的地方停止才可以阻止这种浪费 12345678910111213141516171819202122232425262728void getNextval(Str T,int nextval[])&#123; int j=1,t=0; nextval[1] = 0; while(j&lt;T.length)&#123; if(t==0||T.str[j]==T.str[t])&#123; if(T.str[j+1]!=T.str[t+1]) nextval[j+1] = t+1; else&#123; nextval[j+1] = nextval[t+1]; &#125; t++; j++; &#125; else t=nextval[t]; &#125;&#125;void getNext(Str T,int next[])&#123; int j=1,t=0; next[1] = 0; while(j&lt;T.length)&#123; if(t==0||T.str[j]==T.str[t])&#123; next[j+1] = t+1; t++; j++; &#125; else t=next[t]; &#125;&#125;]]></content>
+      <tags>
+        <tag>数据结构复习</tag>
+        <tag>串</tag>
+        <tag>KMP</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[考研数据结构复习-队列]]></title>
+    <url>%2F2018%2F10%2F19%2F%E8%80%83%E7%A0%94%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%A4%8D%E4%B9%A0-%E9%98%9F%E5%88%97%2F</url>
+    <content type="text"><![CDATA[队列 队列是一种受限的线性表 它只支持FIFO （当然还有一些所谓的双端队列不遵守这个规则） 顺序队列 顺序队列是利用率较低的结构，它不像栈那样一头出，它像一个游标一样只能向右滑动。所以划着划着就到头了。 结构体定义 12345typedef struct&#123; int data[MaxSize];// int front,rear; //front指向队头元素 rear指向队尾元素后面一个位置 &#125;SqQueue; 2.简单操作 12345678910111213141516171819202122bool isEmpty(SqQueue &amp;q)&#123; if(q.rear==q.front) return true; else return false;&#125;bool isFull(SqQueue &amp;q)&#123; if(q.rear==MaxSize) return true; else return false;&#125;bool EnQueue(SqQueue &amp;q,int x)&#123; if(isFull(q)) return false; else&#123; q.data[q.rear] =x; q.rear++; &#125;&#125;bool DeQueue(SqQueue &amp;q,int &amp;x)&#123; if(isEmpty(q)) return false; else&#123; x = q.data[q.front]; q.front++; &#125;&#125; 循环队列 循环队列是对顺序队列的优化，让顺序的数组通过取余运算连乘环，但由于队空条件是q.front==q.rear，当对满时尾追上头就也会 q.front==q.rear 所以出现两类方案解决 放弃一个空间 队满判定改为 (q.rear+1)%==q.rear 增加结构体携带信息量 记录count或者上一步操作类型 结构体定义 12345typedef struct&#123; int data[MaxSize];// int front,rear; //front指向队头元素 rear指向队尾元素后面一个位置 &#125;SqQueue; 2.简单操作 123456789101112131415161718192021222324bool isEmpty(SqQueue &amp;q) &#123; if (q.rear == q.front) return true; else return false;&#125;bool isFull(SqQueue &amp;q) &#123; if ((q.rear+1)%MaxSize == q.front ) return true; else return false;&#125;bool EnQueue(SqQueue &amp;q, int x) &#123; if (isFull(q)) return false; else &#123; q.data[q.rear] = x; q.rear=(q.rear+1)%MaxSize; return true; &#125;&#125;bool DeQueue(SqQueue &amp;q, int &amp;x) &#123; if (isEmpty(q)) return false; else &#123; x = q.data[q.front]; q.front=(q.front+1)%MaxSize; return true; &#125;&#125; 链队列 在单链表的基础上搞了一个栈顶结构体 即指向链的指针+count 结构体定义 1234567typedef struct LinkNode&#123; int data; struct LinkNode *next;&#125;LinkNode;typedef struct&#123; LinkNode *front,*rear;//链表头 链表尾&#125;LinkQueue;//先进先出 2.简单操作 123456789101112131415161718192021222324252627282930313233void InitQueue(LinkQueue &amp;Q)&#123; Q.front=Q.rear=(LinkNode*)malloc(sizeof(LinkNode));//头和尾指向同一个结点 Q.front-&gt;next=NULL;&#125;bool IsEmpty(LinkQueue Q)&#123; if(Q.front==Q.rear) return true; else return false;&#125;void EnQueue(LinkQueue &amp;Q,int x)&#123; LinkNode *s=(LinkNode *)malloc(sizeof(LinkNode)); s-&gt;data=x;s-&gt;next=NULL; Q.rear-&gt;next=s; Q.rear=s;&#125;//出队 头部删除法bool DeQueue(LinkQueue &amp;Q,int &amp;x)&#123; if(Q.front==Q.rear) return false;//队列为空 LinkNode *p=Q.front-&gt;next;//头结点什么都没存，所以头结点的下一个节点才有数据 x=p-&gt;data; Q.front-&gt;next=p-&gt;next;//断链 if(Q.rear==p)//删除的是最后一个元素 Q.rear=Q.front;//队列置为空 free(p); return true;&#125;]]></content>
+      <tags>
+        <tag>数据结构复习</tag>
+        <tag>队列</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[考研数据结构复习-栈合集]]></title>
+    <url>%2F2018%2F10%2F19%2F%E8%80%83%E7%A0%94%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%A4%8D%E4%B9%A0-%E6%A0%88%E5%90%88%E9%9B%86%2F</url>
+    <content type="text"><![CDATA[栈 栈是一种受限的线性表 它只支持LIFO 顺序栈 顺序栈是相对常用的栈 很简单使用 栈顶指针指向栈顶元素 结构体定义 1234typedef struct sqStack &#123; int data[MaxSize]; int top;&#125;SqStack; 2.简单操作 1234567891011121314151617181920212223242526bool StackEmpty(SqStack S) &#123; if (S.top == -1) return true; else return false;&#125;bool StackOverflow(SqStack S) &#123; if (S.top == MaxSize - 1) return true; else return false;&#125;bool Push(SqStack &amp;S,int x) &#123; if (StackOverflow(S)) &#123; return false; &#125; else &#123; S.data[S.top + 1] = x; S.top++; return true; &#125;&#125;bool Pop(SqStack &amp;S,int &amp;x) &#123; if (StackEmpty(S)) return false; else &#123; x = S.data[S.top]; S.top--; return true; &#125;&#125; 共享栈 共享栈是顺序栈的魔改版 感觉非常愚蠢的结构 结构体定义 12345typedef struct sqStack &#123; int data[MaxSize]; int top1; int top2; &#125;SqStack; 2.简单操作 12345678910111213141516171819202122bool StackOverflow(SqStack S) &#123; if (S.top1 +1 == S.top2) return true; else return false;&#125;bool Push(SqStack &amp;S,int x,int stackNum) &#123; if (StackOverflow(S)) &#123; return false; &#125; else &#123; if(stackNum==1) &#123; S.data[S.top1+1]; S.top1++; return true; &#125; else if(stackNum==2) &#123; S.data[S.top2-1]; S.top2--; return true; &#125; else return false; &#125;&#125; 链栈 在单链表的基础上搞了一个栈顶结构体 即指向链的指针+count 结构体定义 12345678typedef struct LNode &#123; int data; struct LNode *next;&#125;LNode, *LinkLNode;typedef struct LinkStack &#123; LinkLNode top; int count;&#125;LinkStack; 2.简单操作 123456789101112131415161718bool Push(LinkStack *&amp;L, int x) &#123; LinkLNode p = (LinkLNode)malloc(sizeof(LNode)); p-&gt;data = x; p-&gt;next = L-&gt;top; L-&gt;top = p; L-&gt;count++; return true;&#125;bool Pop(LinkStack *&amp;L, int &amp;x) &#123; LinkLNode p; if (L-&gt;count == 0) return false; p = L-&gt;top; L-&gt;top = p-&gt;next; x = p-&gt;data; free(p); L-&gt;count--; return true;&#125;]]></content>
+      <tags>
+        <tag>数据结构复习</tag>
+        <tag>栈</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[考研数据结构复习-循环链表&静态链表]]></title>
+    <url>%2F2018%2F10%2F15%2F%E8%80%83%E7%A0%94%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%A4%8D%E4%B9%A0-%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8%2F</url>
+    <content type="text"><![CDATA[链表 线性表从存储结构上来分，主要是顺序表和各种链表，值得注意的是顺序存储不等于顺序存取，数组就是一种随机存取的顺序存储结构 循环链表 循环链表 普通链表的头尾相连 为了偷懒直接用的单链表改的 头结点应该要存数的，有时间改吧 结构体定义 1234typedef struct LNode &#123; int data; struct LNode *next;&#125;LNode, *LinkLNode; 2.初始化 123456int main()&#123; LNode * head=(LinkLNode)malloc(sizeof(LNode)); head=tailInsertCreat(head); showNode(head); printf("%d",isEmpty(head));&#125; 3.简单操作 1234567891011121314151617181920212223242526272829303132333435LinkLNode tailInsertCreat(LinkLNode &amp;L) &#123; LNode *s, *l; L = (LinkLNode)malloc(sizeof(LNode)); l = L; int x = 0; scanf("%d", &amp;x); if (x != 999) &#123; l-&gt;data = x; &#125; else &#123; return L; &#125; while (true) &#123; scanf("%d", &amp;x); if (x == 999) break; s = (LinkLNode)malloc(sizeof(LNode)); s-&gt;data = x; l-&gt;next = s; l = s; &#125; l-&gt;next = L; //只有这句变了 return L;&#125;bool isEmpty(LinkLNode &amp;L) &#123; if (L-&gt;next == L) return true; //循环双链表时 L-&gt;prior==L 也可以判断是否为空 else return false;&#125;void showNode(LinkLNode &amp;L) &#123; printf("%d ", L-&gt;data); LinkLNode p = L-&gt;next; while (p != L) &#123; printf("%d ", p-&gt;data); p = p-&gt;next; &#125;&#125; 静态链表静态链表 结构体定义 1234typedef struct&#123; int data; int next;&#125;SLinklist[100]; 链表完]]></content>
+      <tags>
+        <tag>数据结构复习</tag>
+        <tag>链表</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[考研数据结构复习-双链表]]></title>
+    <url>%2F2018%2F10%2F15%2F%E8%80%83%E7%A0%94%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%A4%8D%E4%B9%A0-%E5%8F%8C%E9%93%BE%E8%A1%A8%2F</url>
+    <content type="text"><![CDATA[链表 线性表从存储结构上来分，主要是顺序表和各种链表，值得注意的是顺序存储不等于顺序存取，数组就是一种随机存取的顺序存储结构 双链表 双链表 data 指向自己的指针*2 结构体定义 1234typedef struct DNode&#123; int data; struct DNode *prior,*next;&#125;DNode,*DLinklist; 2.初始化 1234567int main()&#123; DLinklist head=(DLinklist)malloc(sizeof(DNode)); head = tailInsertCreat(head); showDNode(head); delElem(head,1); showDNode(head);&#125; 3.简单操作 123456789101112131415161718192021222324252627282930313233343536DLinklist tailInsertCreat(DLinklist &amp;L) &#123; DNode *s, *l; L = (DLinklist)malloc(sizeof(DNode)); L-&gt;prior = NULL; l = L; int x = 0; scanf("%d", &amp;x); while (x != 999) &#123; s = (DLinklist)malloc(sizeof(DNode)); s-&gt;data = x; l-&gt;next = s; s-&gt;prior = l; l = s; scanf("%d", &amp;x); &#125; l-&gt;next = NULL; return L;&#125;DLinklist getElem(DLinklist L, int i) &#123; DLinklist p = L; int j = 0; if (i&lt;0) return NULL; //if(i==0) return L; while (p&amp;&amp;j&lt;i) &#123; p = p-&gt;next; j++; &#125; return p;&#125;void delElem(DLinklist L,int i)&#123; DLinklist s,p = getElem(L,i-1); s = p-&gt;next; p-&gt;next = s-&gt;next; s-&gt;next-&gt;prior = p; free(s);&#125; 链表待续]]></content>
+      <tags>
+        <tag>数据结构复习</tag>
+        <tag>链表</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[考研数据结构复习-单链表]]></title>
+    <url>%2F2018%2F10%2F15%2F%E8%80%83%E7%A0%94%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%A4%8D%E4%B9%A0-%E5%8D%95%E9%93%BE%E8%A1%A8%2F</url>
+    <content type="text"><![CDATA[链表 线性表从存储结构上来分，主要是顺序表和各种链表，值得注意的是顺序存储不等于顺序存取，数组就是一种随机存取的顺序存储结构 单链表 单链表 data+ 指向自己的类型的指针 结构体定义 1234typedef struct LNode &#123; int data; struct LNode *next;&#125;LNode, *LinkLNode; 2.初始化 1234567891011121314151617int main() &#123; LNode *head = (LinkLNode)malloc(sizeof(LNode)); head-&gt;next = NULL; //headInsertCreat(head); tailInsertCreat(head); showLNode(head);// int del; int pos,val; for (int i = 0; i&lt;3; i++) &#123; scanf("%d%d",&amp;pos,&amp;val); addElem(head,pos,val);// scanf("%d",&amp;del);// delElem(head,del); showLNode(head); printf("%d",getLongth(head)); &#125;&#125; 3.简单操作 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677LinkLNode getElem(LinkLNode L, int i) &#123; LinkLNode p = L; int j = 0; if (i&lt;0) return NULL; //if(i==0) return L; while (p&amp;&amp;j&lt;i) &#123; p = p-&gt;next; j++; &#125; return p;&#125;void delElem(LinkLNode L,int i)&#123; LinkLNode s,p = getElem(L,i-1); s = p-&gt;next; p-&gt;next = s-&gt;next;&#125;void addElem(LinkLNode L,int i,int x)&#123; LinkLNode temp,s,p = getElem(L,i-1); s = p-&gt;next; temp = (LinkLNode)malloc(sizeof(LNode)); temp-&gt;data = x; p-&gt;next = temp; temp-&gt;next = s;&#125;void headInsertCreat(LinkLNode &amp;L) &#123; LNode *s;//临时指针； int num, temp; scanf("%d", &amp;num); L = (LinkLNode)malloc(sizeof(LNode)); L-&gt;next = NULL; for (int i = 0; i&lt;num; i++) &#123; s = (LinkLNode)malloc(sizeof(LNode)); scanf("%d", &amp;temp); s-&gt;data = temp; s-&gt;next = L-&gt;next; L-&gt;next = s; &#125;&#125;void tailInsertCreat(LinkLNode &amp;L) &#123; LNode *s, *l; L = (LinkLNode)malloc(sizeof(LNode)); l = L; int x = 0; scanf("%d", &amp;x); while (x != 999) &#123; s = (LinkLNode)malloc(sizeof(LNode)); s-&gt;data = x; l-&gt;next = s; l = s; scanf("%d", &amp;x); &#125; l-&gt;next = NULL;&#125;void showLNode(LinkLNode &amp;L) &#123; LinkLNode p = L; if (p-&gt;next == NULL) &#123; return; &#125; else p = p-&gt;next; while (p-&gt;next != NULL) &#123; cout &lt;&lt; p-&gt;data &lt;&lt; " "; p = p-&gt;next; &#125; cout &lt;&lt; p-&gt;data;&#125;int getLongth(LinkLNode &amp;L)&#123; int num=0; LinkLNode p=L-&gt;next; while(p!=NULL)&#123; p=p-&gt;next; num++; &#125; return num;&#125; 链表待续]]></content>
+      <tags>
+        <tag>数据结构复习</tag>
+        <tag>链表</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[考研数据结构复习---顺序表]]></title>
+    <url>%2F2018%2F07%2F26%2F%E8%80%83%E7%A0%94%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%A4%8D%E4%B9%A0-%E9%A1%BA%E5%BA%8F%E8%A1%A8%2F</url>
+    <content type="text"><![CDATA[线性表 线性表从存储结构上来分，主要是顺序表和各种链表，值得注意的是顺序存储不等于顺序存取，数组就是一种随机存取的顺序存储结构 顺序表 顺序表在我以前的认知里就是数组，但是王道天勤上貌似用结构更多一些。 结构体定义 12345678910111213141516#include&lt;iostream&gt;#include&lt;stdlib.h&gt;using namespace std;#define MaxSize 50//静态分配typedef struct&#123; int data[MaxSize]; int length;&#125;SqList;//动态定义typedef struct&#123; int *data; int length;&#125;DSqList; 2.初始化 12345SqList sl;sl.length = 0;DSqList dsl;dsl.data = new int[MaxSize];//c++写法dsl.data = (int*)malloc(sizeof(int)*MaxSize);//c写法 3.简单操作 1234567891011121314151617181920212223242526272829void addElem(SqList &amp;sl, int elem) &#123; sl.data[sl.length] = elem; sl.length++;&#125;int findPos(SqList sl, int elem) &#123; for (int i = 0; i&lt;sl.length; i++) &#123; if (sl.data[i] &gt;= elem) &#123; return i; &#125; &#125; return sl.length;&#125;bool insertElem(SqList &amp;sl, int pos, int elem) &#123; if (pos&lt;0 || pos &gt;= MaxSize) return false; for (int i = sl.length - 1; i &gt;= pos; i--) &#123; sl.data[i + 1] = sl.data[i]; &#125; sl.data[pos] = elem; sl.length++; return true;&#125;void showElem(SqList sl) &#123; for (int i=0; i&lt;sl.length; i++) &#123; cout &lt;&lt; sl.data[i] &lt;&lt; " "; &#125; cout &lt;&lt; endl;&#125; 链表待续]]></content>
+      <tags>
+        <tag>数据结构复习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Hello Blog]]></title>
+    <url>%2F2018%2F04%2F15%2Fhello-blog%2F</url>
+    <content type="text"><![CDATA[Hello，world.学习Markdown无序列表 * 有序列表 1待办事宜 高数微分方程学习 蓝桥杯国赛准备 英语六级 英语口语 建一个博客 这是一条引用 图片与链接 bilibili 字体粗体 斜体 粗斜 代码框12for i in range(10): print(i) 分割线 序列图123Alice-&gt;Bob: Hello Bob, how are you?Note right of Bob: Bob thinksBob--&gt;Alice: I am good thanks!]]></content>
+      <categories>
+        <category>学习笔记</category>
+      </categories>
+      <tags>
+        <tag>划水</tag>
+      </tags>
+  </entry>
+</search>
