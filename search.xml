@@ -1,9 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[hello]]></title>
-    <url>%2F2019%2F04%2F18%2Fhello%2F</url>
-    <content type="text"><![CDATA[]]></content>
+    <title><![CDATA[语音模仿2-6|1bigpig]]></title>
+    <url>%2F2019%2F04%2F20%2F%E8%AF%AD%E9%9F%B3%E6%A8%A1%E4%BB%BF2-6-1bigpig%2F</url>
+    <content type="text"><![CDATA[var ap = new APlayer({ element: document.getElementById("aplayer-rZfLrdYN"), narrow: false, autoplay: false, showlrc: false, music: { title: "语音模仿2-6-1bigpig", author: "zong", url: "bigpig.mp3", pic: "", lrc: "" } }); window.aplayers || (window.aplayers = []); window.aplayers.push(ap);]]></content>
+      <tags>
+        <tag>English Learning Record</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[语音模仿1-2|1平翘ʃszi]]></title>
+    <url>%2F2019%2F04%2F20%2F%E8%AF%AD%E9%9F%B3%E6%A8%A1%E4%BB%BF1-2-1%E5%B9%B3%E7%BF%98%CA%83szi%2F</url>
+    <content type="text"><![CDATA[var ap = new APlayer({ element: document.getElementById("aplayer-SjsSLOix"), narrow: false, autoplay: false, showlrc: false, music: { title: "语音模仿1-2-1平翘ʃszi", author: "zong", url: "平翘ʃszi.mp3", pic: "", lrc: "" } }); window.aplayers || (window.aplayers = []); window.aplayers.push(ap);]]></content>
+      <tags>
+        <tag>English Learning Record</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[口语测试]]></title>
+    <url>%2F2019%2F04%2F20%2F%E5%8F%A3%E8%AF%AD%E6%B5%8B%E8%AF%95%2F</url>
+    <content type="text"><![CDATA[入门测试第一次测试 var ap = new APlayer({ element: document.getElementById("aplayer-JPNwfIGB"), narrow: false, autoplay: false, showlrc: false, music: { title: "？？", author: "zong", url: "test01.mp3", pic: "", lrc: "" } }); window.aplayers || (window.aplayers = []); window.aplayers.push(ap); 第一次测试 var ap = new APlayer({ element: document.getElementById("aplayer-KZfpSHVd"), narrow: false, autoplay: false, showlrc: false, music: { title: "？？", author: "zong", url: "test02-01.mp3", pic: "", lrc: "" } }); window.aplayers || (window.aplayers = []); window.aplayers.push(ap); var ap = new APlayer({ element: document.getElementById("aplayer-XfAimOru"), narrow: false, autoplay: false, showlrc: false, music: { title: "？？", author: "zong", url: "test02-02.mp3", pic: "", lrc: "" } }); window.aplayers || (window.aplayers = []); window.aplayers.push(ap); var ap = new APlayer({ element: document.getElementById("aplayer-spcekXGM"), narrow: false, autoplay: false, showlrc: false, music: { title: "？？", author: "zong", url: "test02-03.mp3", pic: "", lrc: "" } }); window.aplayers || (window.aplayers = []); window.aplayers.push(ap); var ap = new APlayer({ element: document.getElementById("aplayer-PeeVBnuh"), narrow: false, autoplay: false, showlrc: false, music: { title: "？？", author: "zong", url: "wet&vet.mp3", pic: "", lrc: "" } }); window.aplayers || (window.aplayers = []); window.aplayers.push(ap);]]></content>
+      <tags>
+        <tag>English Learning Record</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Lemon Tree学习]]></title>
+    <url>%2F2019%2F04%2F18%2FLemonTree%2F</url>
+    <content type="text"><![CDATA[Lemon Tree歌词 I’m sitting here in a boring roomIt’s just another rainy Sunday afternoonI’m wasting my time I got nothing to doI’m hanging around I’m waiting for youBut nothing ever happensAnd I wonderI’m driving around in my carI’m driving too fast I’m driving too farI’d like to change my point of viewI feel so lonely I’m waiting for youBut nothing ever happensAnd I wonderI wonder howI wonder whyYesterday you told me about the blue blue skyAnd all that I can see is just a yellow lemon treeI’m turning my head up and downI’m turning turning turning turning turning aroundAnd all that I can see is just another lemon treeSing：Da Da Da Da Da Di Da DaDa Da Da Da Di Da DaDa Di i Da 录音 var ap = new APlayer({ element: document.getElementById("aplayer-DEhLTDEq"), narrow: false, autoplay: false, showlrc: false, music: { title: "LemonTree", author: "zong", url: "LemonTree.mp3", pic: "", lrc: "" } }); window.aplayers || (window.aplayers = []); window.aplayers.push(ap);]]></content>
+      <tags>
+        <tag>English Learning Record</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[考研数据结构复习-图的存储]]></title>
@@ -105,17 +132,6 @@
     <content type="text"><![CDATA[线性表 线性表从存储结构上来分，主要是顺序表和各种链表，值得注意的是顺序存储不等于顺序存取，数组就是一种随机存取的顺序存储结构 顺序表 顺序表在我以前的认知里就是数组，但是王道天勤上貌似用结构更多一些。 结构体定义 12345678910111213141516#include&lt;iostream&gt;#include&lt;stdlib.h&gt;using namespace std;#define MaxSize 50//静态分配typedef struct&#123; int data[MaxSize]; int length;&#125;SqList;//动态定义typedef struct&#123; int *data; int length;&#125;DSqList; 2.初始化 12345SqList sl;sl.length = 0;DSqList dsl;dsl.data = new int[MaxSize];//c++写法dsl.data = (int*)malloc(sizeof(int)*MaxSize);//c写法 3.简单操作 1234567891011121314151617181920212223242526272829void addElem(SqList &amp;sl, int elem) &#123; sl.data[sl.length] = elem; sl.length++;&#125;int findPos(SqList sl, int elem) &#123; for (int i = 0; i&lt;sl.length; i++) &#123; if (sl.data[i] &gt;= elem) &#123; return i; &#125; &#125; return sl.length;&#125;bool insertElem(SqList &amp;sl, int pos, int elem) &#123; if (pos&lt;0 || pos &gt;= MaxSize) return false; for (int i = sl.length - 1; i &gt;= pos; i--) &#123; sl.data[i + 1] = sl.data[i]; &#125; sl.data[pos] = elem; sl.length++; return true;&#125;void showElem(SqList sl) &#123; for (int i=0; i&lt;sl.length; i++) &#123; cout &lt;&lt; sl.data[i] &lt;&lt; " "; &#125; cout &lt;&lt; endl;&#125; 链表待续]]></content>
       <tags>
         <tag>数据结构复习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Hello Blog]]></title>
-    <url>%2F2018%2F04%2F15%2Fhello-blog%2F</url>
-    <content type="text"><![CDATA[Hello，world.学习Markdown无序列表 * 有序列表 1待办事宜 高数微分方程学习 蓝桥杯国赛准备 英语六级 英语口语 建一个博客 这是一条引用 图片与链接 bilibili 字体粗体 斜体 粗斜 代码框12for i in range(10): print(i) 分割线 序列图123Alice-&gt;Bob: Hello Bob, how are you?Note right of Bob: Bob thinksBob--&gt;Alice: I am good thanks!]]></content>
-      <categories>
-        <category>学习笔记</category>
-      </categories>
-      <tags>
-        <tag>划水</tag>
       </tags>
   </entry>
 </search>
